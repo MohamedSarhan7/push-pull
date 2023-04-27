@@ -11,13 +11,10 @@ function MessageList() {
 
     // }
     useEffect(() => {
-
-
-        const myIn = setInterval(() => {
-            axios.get(`${baseUrl}/messages?lastMessage=${lastMessage}`)
+            axios.get(`${baseUrl}/messages`)
                 .then(response => {
-                    setMessages((prevMessages) => [...prevMessages, ...response.data]);
-                    const msg = response.data[response.data.length - 1]
+                    setMessages((prevMessages) => [...prevMessages, response.data]);
+                    // const msg = response.data[response.data.length - 1]
                     setlastMessage(msg.createdAt);
                     lastMessageRef.current = msg.createdAt;
 
@@ -26,11 +23,11 @@ function MessageList() {
                     console.error(error);
                 });
 
-        }, 7000);
+  
 
 
-        return () => clearInterval(myIn);
-    }, [lastMessage]);
+        // return () => clearInterval(myIn);
+    }, [messages]);
 
     return (
         <ul className="list-group">
