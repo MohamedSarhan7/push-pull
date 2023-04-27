@@ -1,0 +1,30 @@
+.message-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.message-list li {
+  margin-bottom: 10px;
+}
+
+.message-list li strong {
+  display: none;
+}
+
+.message-form input[type="text"] {
+  margin-right: 10px;
+}
+
+.message-form button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.message-form button:hover {
+  background-color: #3e8e41;
+}
