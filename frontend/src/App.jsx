@@ -1,16 +1,19 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+
 import './App.css'
-import ChatRoom from './components//ChatRoom';
+import ChatRoom from './components/ChatRoom';
 
 function App() {
 
 
   return (
 
-    <div>
-      <ChatRoom />
-    </div>
+    <>
+      
+      <div className="d-flex justify-content-center">
+
+        <ChatRoom />
+      </div>
+    </>
   )
 }
 

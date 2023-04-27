@@ -1,27 +1,42 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-import {baseUrl} from '../../config/config.js';
-function MessageForm() {
 
+function MessageForm({ onSubmit }) {
     const [message, setMessage] = useState('');
 
-    const handleSubmit = event => {
+    function handleMessageChange(event) {
+        setMessage(event.target.value);
+    }
+
+    function handleSubmit(event) {
         event.preventDefault();
-        axios.post(`${baseUrl}/messages`, { message }).then(response => {
-            console.log(response.data);
+
+        if (message) {
+            onSubmit(message);
             setMessage('');
-        }).catch(error => {
-            console.error(error);
-        });
-    };
+        }
+    }
 
     return (
-        <form onSubmit={handleSubmit} className="my-4">
-            <div className="input-group">
-                <input type="text" className="form-control" placeholder="Type your message here" value={message} onChange={event => setMessage(event.target.value)} />
-                <button type="submit" className="btn btn-primary">Send</button>
+        <form onSubmit={handleSubmit}>
+            <div className="mb-2">
+                <label htmlFor="message" className="">
+                    Message
+                </label>
+            </div>
+            <div className='d-flex '>
+                <input
+                    type="text"
+                    id="message"
+                    value={message}
+                    onChange={handleMessageChange}
+                    className="form-control"
+                />
+                <button type="submit" className="btn btn-primary">
+                    Send
+                </button>
             </div>
         </form>
-    );}
+    );
+}
 
-    export default MessageForm;
+export default MessageForm;

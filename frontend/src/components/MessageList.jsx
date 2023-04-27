@@ -1,43 +1,22 @@
-import React, { useState, useEffect, useRef } from 'react';
-import axios from 'axios';
-import { baseUrl } from '../../config/config.js';
+import React from 'react';
 
-function MessageList() {
-    const [messages, setMessages] = useState([]);
-    const [lastMessage, setlastMessage] = useState('')
-    const lastMessageRef = useRef(lastMessage);
-
-    // const myFunc = () => {
-
-    // }
-    useEffect(() => {
-
-
-        const myIn = setInterval(() => {
-            axios.get(`${baseUrl}/messages?lastMessage=${lastMessage}`)
-                .then(response => {
-                    setMessages((prevMessages) => [...prevMessages, ...response.data]);
-                    const msg = response.data[response.data.length - 1]
-                    setlastMessage(msg.createdAt);
-                    lastMessageRef.current = msg.createdAt;
-
-
-                }).catch(error => {
-                    console.error(error);
-                });
-
-        }, 7000);
-
-
-        return () => clearInterval(myIn);
-    }, [lastMessage]);
-
+function MessageList({ messages }) {
+    console.log(messages)
     return (
-        <ul className="list-group">
-            {messages.map((message, index) => (
-                <li key={index} className="list-group-item">{message.message}</li>
-            ))}
-        </ul>
+        <div className="w-100 h-100  border rounded-lg p-4 mb-4">
+            {messages.map((msg, index) => (
+
+                <div key={index} className=" d-flex mb-2" >
+                    {
+                        'itsMe' in msg ?
+                            <div className='bg-danger'>{msg.message}</div>
+                            :
+                            <div className=' '>{msg.message}</div>
+                    }
+                </div>
+            ))
+            }
+        </div >
     );
 }
 
